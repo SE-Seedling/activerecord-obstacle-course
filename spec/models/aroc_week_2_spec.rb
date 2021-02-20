@@ -20,6 +20,7 @@ describe 'ActiveRecord Obstacle Course, Week 2' do
 
     # ------------------ Using ActiveRecord ----------------------
     orders_of_user_3 = Order.where(user_id: @user_3.id)
+    # orders_of_user_3 = Order.where("user_id = ?", User.third.id)
     # ------------------------------------------------------------
 
     # Expectation
@@ -76,7 +77,7 @@ describe 'ActiveRecord Obstacle Course, Week 2' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    items = Item.where.not(id: [@item_2, @item_5, @item_6])
+    items = Item.where.not(id: [@item_2, @item_5, @item_6]) 
     # ------------------------------------------------------------
 
     # Expectation
@@ -87,7 +88,7 @@ describe 'ActiveRecord Obstacle Course, Week 2' do
     expected_result = [@item_4, @item_2, @item_5, @item_3]
 
     # ----------------------- Using Ruby -------------------------
-    order = Order.find(@order_3.id)
+    # order = Order.find(@order_3.id)
     # grouped_items = order.items.sort_by { |item| item.name }
     # ------------------------------------------------------------
 
@@ -144,7 +145,7 @@ describe 'ActiveRecord Obstacle Course, Week 2' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    names = Item.joins(:orders).pluck(:name) #you can swith Item with Order, etc. And it works! 
+    names = Item.joins(:orders).pluck(:name) #you can swith Item with Order, etc. And it works!
     # ------------------------------------------------------------
 
     # Expectation
