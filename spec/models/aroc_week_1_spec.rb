@@ -86,6 +86,8 @@ describe 'ActiveRecord Obstacle Course, Week 1' do
 
     # ------------------ Using ActiveRecord ----------------------
     items = Item.where(id: ids_to_find)
+    #you can also do Item.select(:id).where()
+    # what does not work ( bc of oerder) is Item.find([@item_1.id, @item_2.id, @item_4.id])
     # ------------------------------------------------------------
 
     # Expectation
