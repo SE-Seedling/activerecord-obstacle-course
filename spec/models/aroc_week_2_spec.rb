@@ -144,7 +144,7 @@ describe 'ActiveRecord Obstacle Course, Week 2' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    names = Item.joins(:orders).pluck(:name)
+    names = Item.joins(:orders).pluck(:name) #you can swith Item with Order, etc. And it works! 
     # ------------------------------------------------------------
 
     # Expectation
