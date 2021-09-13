@@ -100,6 +100,7 @@ describe 'ActiveRecord Obstacle Course, Week 3' do
 
     # ------------------ Using ActiveRecord ----------------------
     average = Order.where(user_id: @user_3.id).average(:amount) #does not work on rails c bc we have not created @user_3 there.
+    average = Order.where('user_id = ?', @user_3.id).average(:amount) # Alexander
     # ------------------------------------------------------------
 
     # Expectation
