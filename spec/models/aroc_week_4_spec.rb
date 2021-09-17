@@ -89,6 +89,7 @@ describe 'ActiveRecord Obstacle Course, Week 4' do
 
     # ------------------ ActiveRecord Solution ----------------------
     ordered_items = Item.joins(:orders).distinct(:id).order(:name)
+    ordered_items = Item.joins(:order_items).distinct.order(:name) # Alexander
     # ---------------------------------------------------------------
 
     # Expectations
