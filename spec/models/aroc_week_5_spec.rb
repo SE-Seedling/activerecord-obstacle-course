@@ -36,6 +36,7 @@ describe 'ActiveRecord Obstacle Course, Week 5' do
                           .distinct(:name)
                           .order(:name)
                           .pluck(:name)
+    # ordered_items_names = Item.joins(:order_items).distinct(:name).order(:name).pluck(:name) Alexander
     # When you find a solution, experiment with adjusting your method chaining
     # Which ones are you able to switch around without relying on Ruby's Enumerable methods?
     # ---------------------------------------------------------------
