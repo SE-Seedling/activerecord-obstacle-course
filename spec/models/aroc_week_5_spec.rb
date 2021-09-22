@@ -89,6 +89,7 @@ describe 'ActiveRecord Obstacle Course, Week 5' do
                       .joins(:items)
                       .group(:name)
                       .order('users.name')
+    # custom_results = User.joins(:items).group(:name).select('uses.name, COUNT(items.id) as total_item_count').order(:name) # Alexander
     # ---------------------------------------------------------------
 
     expect(custom_results[0].name).to eq(@user_2.name)
@@ -134,12 +135,16 @@ describe 'ActiveRecord Obstacle Course, Week 5' do
     # how will you turn this into the proper ActiveRecord commands?
 
     # ------------------ ActiveRecord Solution ----------------------
-    data = User.joins(orders: :order_items)
-              .select('users.name AS user_name','orders.id as order_id', '(orders.amount / COUNT(order_items.id)) AS avg_item_cost')
-              .group('users.name', 'orders.id')
-              .order('user_name DESC', 'avg_item_cost')
-              #      expected: ["Zoolander", 3581, 125]
-            #got: ["Zoolander", 3581, 0.12525e3]
+    # data = User.joins(orders: :order_items)
+    #           .select('users.name AS user_name','orders.id as order_id', '(orders.amount / COUNT(order_items.id)) AS avg_item_cost')
+    #           .group('users.name', 'orders.id')
+    #           .order('user_name DESC', 'avg_item_cost')
+    #           #      expected: ["Zoolander", 3581, 125]
+    #         #got: ["Zoolander", 3581, 0.12525e3]
+    data = User.joins(:order_items)
+               .group("users.name, orders.id")
+               .select("users.name as user_name, orders.id as order_id, CAST(ROUND(orders.amount / count(order_items.id)-0.5, 1) AS int) as avg_item_cost")
+               .order(user_name: :desc, avg_item_cost: :asc) # Alexander
     # ---------------------------------------------------------------
 
     expect([data[0].user_name,data[0].order_id,data[0].avg_item_cost]).to eq([@user_1.name, @order_1.id, 50])
